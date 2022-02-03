@@ -1,10 +1,10 @@
-import 'package:get/get_connect/connect.dart';
+import 'package:get/get_connect.dart';
 
 class RestClient extends GetConnect {
-  final _backendbaseUrl = 'http://dartweek.academiadoflutter.com.br';
+  final _backendBaseUrl = 'http://dartweek.academiadoflutter.com.br';
 
   RestClient() {
-    httpClient.baseUrl = _backendbaseUrl;
+    httpClient.baseUrl = _backendBaseUrl;
   }
 }
 
