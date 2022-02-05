@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/export.dart';
-import 'package:rodrigo_rahman/app/core/ui/widgets/vakinha_appbar.dart';
-import 'package:rodrigo_rahman/app/core/ui/widgets/vakinha_button.dart';
+import 'package:rodrigo_rahman/app/modules/splash/splash_controller.dart';
 
-class SplashPage extends StatelessWidget {
+import '../../core/ui/widgets/vakinha_button.dart';
+
+class SplashPage extends GetView<SplashController> {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
@@ -29,24 +29,18 @@ class SplashPage extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: context.heightTransformer(
-                      reducedBy: 85,
-                    ),
+                    height: context.heightTransformer(reducedBy: 85),
                   ),
-                  Image.asset(
-                    'assets/images/logo.png',
-                  ),
+                  Image.asset('assets/images/logo.png'),
                   const SizedBox(
                     height: 60,
                   ),
                   VakinhaButton(
-                    onPressed: () {
-                      Get.toNamed('/auth/login');
-                    },
-                    label: ' ACESSAR',
+                    label: 'ACESSAR',
                     width: context.widthTransformer(reducedBy: 40),
                     height: 35,
-                  )
+                    onPressed: () => controller.checkLogged(),
+                  ),
                 ],
               ),
             )
