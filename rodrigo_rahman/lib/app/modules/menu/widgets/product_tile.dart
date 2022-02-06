@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:rodrigo_rahman/app/core/ui/formatter_helper.dart';
 import 'package:rodrigo_rahman/app/core/ui/vakinha_ui.dart';
+import 'package:rodrigo_rahman/app/models/product_model.dart';
 
 class ProductTile extends StatelessWidget {
-  const ProductTile({Key? key}) : super(key: key);
+  final ProductModel product;
+
+  const ProductTile({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +19,16 @@ class ProductTile extends StatelessWidget {
           children: [
             Container(
               width: 80,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                      'https://images.tcdn.com.br/img/img_prod/584235/licor_43_diego_zamora_cuarenta_y_tres_700_ml_438983486_1_fb9e3d978abc6d123b65a770457d307f.jpg'),
+                    'http://dartweek.academiadoflutter.com.br/images${product.image}',
+                  ),
                 ),
               ),
             ),
@@ -34,13 +39,13 @@ class ProductTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
+                  children: [
                     Text(
-                      ' Licor 43',
+                      product.name,
                       style: VakinhaUI.textBold,
                     ),
                     Text(
-                      r'R$ 200,00,',
+                      FormatterHelper.formatCurrency(product.price),
                     ),
                   ],
                 ),
