@@ -5,6 +5,7 @@ import 'package:rodrigo_rahman/app/core/bindings/applications_bindings.dart';
 import 'package:rodrigo_rahman/app/core/ui/vakinha_ui.dart';
 import 'package:rodrigo_rahman/app/routes/auth_routers.dart';
 import 'package:rodrigo_rahman/app/routes/home_routers.dart';
+import 'package:rodrigo_rahman/app/routes/product_routers.dart';
 import 'package:rodrigo_rahman/app/routes/splash_routers.dart';
 
 Future<void> main() async {
@@ -25,6 +26,7 @@ class VakinhaBurguerMainApp extends StatelessWidget {
         ...SplashRouters.routers,
         ...AuthRouters.routers,
         ...HomeRouters.routers,
+        ...ProductRouters.routers,
       ],
     );
   }
