@@ -3,7 +3,7 @@ import 'package:get/route_manager.dart';
 import 'package:rodrigo_rahman/app/core/ui/formatter_helper.dart';
 import 'package:rodrigo_rahman/app/core/ui/vakinha_ui.dart';
 import 'package:rodrigo_rahman/app/models/product_model.dart';
-
+import 'package:get/get.dart';
 class ProductTile extends StatelessWidget {
   final ProductModel product;
 

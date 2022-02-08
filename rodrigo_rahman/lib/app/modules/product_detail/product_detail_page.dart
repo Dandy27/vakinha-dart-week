@@ -1,11 +1,12 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:rodrigo_rahman/app/core/ui/formatter_helper.dart';
-import 'package:rodrigo_rahman/app/core/ui/vakinha_ui.dart';
-import 'package:rodrigo_rahman/app/core/ui/widgets/vakinha_appbar.dart';
-import 'package:rodrigo_rahman/app/core/ui/widgets/vakinha_button.dart';
+import 'package:get/get.dart';
+
+import '../../core/ui/formatter_helper.dart';
+import '../../core/ui/vakinha_ui.dart';
 import '../../core/ui/widgets/plus_minus_box.dart';
-import './product_detail_controller.dart';
+import '../../core/ui/widgets/vakinha_appbar.dart';
+import '../../core/ui/widgets/vakinha_button.dart';
+import 'product_detail_controller.dart';
 
 class ProductDetailPage extends GetView<ProductDetailController> {
   const ProductDetailPage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: constraints.maxHeight,
-              minWidth: constraints.maxHeight,
+              minWidth: constraints.maxWidth,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,10 +30,11 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                   height: context.heightTransformer(
                     reducedBy: 60,
                   ),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                            'https://lh3.googleusercontent.com/ItIvM56EJYye3AwFqfXIlh_8B-KXcQggTQ7riMq40job9gDs8tj8nPiN-ed1lxdA6N-TadV5hJeujC9_=w1080-h608-p-no-v0'),
+                          'http://dartweek.academiadoflutter.com.br/images${controller.product.image}',
+                        ),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -42,7 +44,7 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
-                    'X-TUDÃO',
+                    controller.product.name,
                     style: context.textTheme.headline4!.copyWith(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -52,29 +54,36 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Text(
-                    'X-TUDÃO',
+                    controller.product.description,
                     style: context.textTheme.bodyText2!,
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                PlusMinusBox(
-                  label: 'X-TUDAO',
-                  backgroudColor: Colors.pink,),
+                Obx(() {
+                  return PlusMinusBox(
+                    quantity: controller.quantity,
+                    price: controller.product.price,
+                    minusCallback: controller.removeProduct,
+                    plusCallback: controller.addProduct,
+                  );
+                }),
                 const Divider(),
                 ListTile(
                   title: const Text(
                     'Total',
                     style: VakinhaUI.textBold,
                   ),
-                  trailing: Text(
-                    FormatterHelper.formatCurrency(200),
-                    style: VakinhaUI.textBold,
-                  ),
+                  trailing: Obx(() {
+                    return Text(
+                      FormatterHelper.formatCurrency(controller.totalPrice),
+                      style: VakinhaUI.textBold,
+                    );
+                  }),
                 ),
                 const SizedBox(
-                   height: 20,
+                  height: 20,
                 ),
                 Center(
                   child: SizedBox(

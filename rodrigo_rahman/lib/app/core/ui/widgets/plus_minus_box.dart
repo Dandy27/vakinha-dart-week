@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:rodrigo_rahman/app/core/ui/formatter_helper.dart';
+import 'package:rodrigo_rahman/app/modules/menu/widgets/vakinha_rounded_button.dart';
 
 class PlusMinusBox extends StatelessWidget {
   final bool elevated;
   final Color? backgroudColor;
   final String? label;
+  final int quantity;
+  final double price;
+  final VoidCallback minusCallback;
+  final VoidCallback plusCallback;
+  final bool calculateTotal;
 
   const PlusMinusBox({
     Key? key,
     this.elevated = false,
     this.backgroudColor,
     this.label,
+    required this.quantity,
+    required this.price,
+    required this.minusCallback,
+    required this.plusCallback,
+    this.calculateTotal = false,
   }) : super(key: key);
 
   @override
@@ -25,15 +37,34 @@ class PlusMinusBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Visibility(
               visible: label != null,
-              child: Text(label ?? '',
-              style:  const TextStyle(fontSize: 15),
-              overflow: TextOverflow.ellipsis,
+              child: Text(
+                label ?? '',
+                style: const TextStyle(fontSize: 15),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-            Row()
+            Row(
+              children: [
+                VakinhaRoundedButton(onPressed: minusCallback, label: '-'),
+                Text('$quantity'),
+                VakinhaRoundedButton(onPressed: plusCallback, label: '+'),
+              ],
+            ),
+            Visibility(visible: label == null, child: const Spacer()),
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 10),
+              constraints: const BoxConstraints(minWidth: 70),
+              child: Text(
+                FormatterHelper.formatCurrency(
+                  calculateTotal ? price * quantity : price,
+                ),
+              ),
+            ),
           ],
         ),
       ),
