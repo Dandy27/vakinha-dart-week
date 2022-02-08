@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:get/get.dart';
 
+=======
+>>>>>>> 9a3f33f1877ca55a5ac745fd9c3f02b303e77d15
 import '../../core/ui/formatter_helper.dart';
 import '../../core/ui/vakinha_ui.dart';
 import '../../core/ui/widgets/plus_minus_box.dart';
 import '../../core/ui/widgets/vakinha_appbar.dart';
 import '../../core/ui/widgets/vakinha_button.dart';
+<<<<<<< HEAD
 import 'product_detail_controller.dart';
+=======
+import './product_detail_controller.dart';
+>>>>>>> 9a3f33f1877ca55a5ac745fd9c3f02b303e77d15
 
 class ProductDetailPage extends GetView<ProductDetailController> {
   const ProductDetailPage({Key? key}) : super(key: key);
@@ -15,18 +22,25 @@ class ProductDetailPage extends GetView<ProductDetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: VakinhaAppbar(),
-      body: LayoutBuilder(builder: (_, constraints) {
-        return SingleChildScrollView(
-          child: ConstrainedBox(
+      body: LayoutBuilder(
+        builder: (_, constraints) {
+          return SingleChildScrollView(
+              child: ConstrainedBox(
             constraints: BoxConstraints(
+<<<<<<< HEAD
               minHeight: constraints.maxHeight,
               minWidth: constraints.maxWidth,
             ),
+=======
+                minHeight: constraints.maxHeight,
+                minWidth: constraints.maxWidth),
+>>>>>>> 9a3f33f1877ca55a5ac745fd9c3f02b303e77d15
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: context.width,
+<<<<<<< HEAD
                   height: context.heightTransformer(
                     reducedBy: 60,
                   ),
@@ -35,6 +49,13 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                         image: NetworkImage(
                           'http://dartweek.academiadoflutter.com.br/images${controller.product.image}',
                         ),
+=======
+                  height: context.heightTransformer(reducedBy: 60),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'http://dartweek.academiadoflutter.com.br/images${controller.product.image}'),
+>>>>>>> 9a3f33f1877ca55a5ac745fd9c3f02b303e77d15
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -42,13 +63,11 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                   height: 10,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20),
                   child: Text(
                     controller.product.name,
                     style: context.textTheme.headline4!.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -63,10 +82,17 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                 ),
                 Obx(() {
                   return PlusMinusBox(
+<<<<<<< HEAD
                     quantity: controller.quantity,
                     price: controller.product.price,
                     minusCallback: controller.removeProduct,
                     plusCallback: controller.addProduct,
+=======
+                    minusCallback: controller.removeProduct,
+                    plusCallback: controller.addProduct,
+                    price: controller.product.price,
+                    quantity: controller.quantity,
+>>>>>>> 9a3f33f1877ca55a5ac745fd9c3f02b303e77d15
                   );
                 }),
                 const Divider(),
@@ -89,16 +115,17 @@ class ProductDetailPage extends GetView<ProductDetailController> {
                   child: SizedBox(
                     width: context.widthTransformer(reducedBy: 10),
                     child: VakinhaButton(
-                      onPressed: () {},
-                      label: 'ADICIONAR',
+                      label:
+                          controller.alreadyAdded ? 'ATUALIZAR' : 'ADICIONAR',
+                      onPressed: controller.addProductInShoppingCard,
                     ),
                   ),
-                ),
+                )
               ],
             ),
-          ),
-        );
-      }),
+          ));
+        },
+      ),
     );
   }
 }
