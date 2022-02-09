@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rodrigo_rahman/app/core/services/auth_service.dart';
+import 'package:rodrigo_rahman/app/core/services/shopping_card_service.dart';
 import 'package:rodrigo_rahman/app/modules/menu/menu_bindings.dart';
 import 'package:rodrigo_rahman/app/modules/menu/menu_page.dart';
 
 class HomeController extends GetxController {
   static const NAVIGATOR_KEY = 1;
+  final ShoppingCardService _shoppingCardService;
 
   final _tabIndex = 0.obs;
   final _tabs = [
@@ -14,7 +16,12 @@ class HomeController extends GetxController {
     '/exit',
   ];
 
+  HomeController({required ShoppingCardService shoppingCardService})
+      : _shoppingCardService = shoppingCardService;
+
   int get tabIndex => _tabIndex.value;
+
+  int get totalProductsInShoppingCard => _shoppingCardService.totalPructs;
 
   set tabIndex(int index) {
     _tabIndex(index);
